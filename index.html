@@ -158,7 +158,11 @@
       controls.target.add(camShift);
 
       // ─── Light ────────────────────────────────────────────────────────────────
-      scene.add(new THREE.AmbientLight(0xffffff, Math.PI));
+      //scene.add(new THREE.AmbientLight(0xffffff, Math.PI));
+      scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+      const dirLight = new THREE.DirectionalLight(0xffffff, 3);
+      dirLight.position.set(5, 10, 5);
+      scene.add(dirLight);
 
       // ─── Blob ─────────────────────────────────────────────────────────────────
       const blob = new Blob(renderer);
@@ -166,9 +170,15 @@
       // ─── Models ───────────────────────────────────────────────────────────────
       const loader = new GLTFLoader();
 
+      //const head = (await loader.loadAsync("./taban.glb")).scene.children[0];
+      //head.geometry.rotateY(Math.PI * 0.01);
+      //head.material = new THREE.MeshMatcapMaterial({ color: 0xffffff });
+      //scene.add(head);
       const head = (await loader.loadAsync("./taban.glb")).scene.children[0];
       head.geometry.rotateY(Math.PI * 0.01);
-      head.material = new THREE.MeshMatcapMaterial({ color: 0xffffff });
+      //head.material = new THREE.MeshMatcapMaterial({ color: 0xffffff });
+      head.scale.setScalar(4.724);
+      head.position.set(0.226, -0.569, 0.63);
       scene.add(head);
 
       const helmet = (
